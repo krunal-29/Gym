@@ -28,6 +28,14 @@ const dashboard = {
       url: '/dashboard/Trainer',
       icon: icons.DashboardOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'Excercise master',
+      title: 'Excercise master',
+      type: 'item',
+      url: '/dashboard/Excercisemaster',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false
     }
   ]
 };

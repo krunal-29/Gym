@@ -5,6 +5,7 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import Trainer from"../Trainer"
 import User from 'User';
+import Excercise from 'Excercisemaster';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -42,6 +43,9 @@ const MainRoutes = {
         },{
           path: 'Trainer',
           element: <Trainer />
+        },{
+          path: 'Excercisemaster',
+          element: <Excercise />
         }
       ]
     },

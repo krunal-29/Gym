@@ -13,7 +13,7 @@ import SearchAppBar from './Searchbar';
 
 
 
-export default function Trainer() {
+export default function Excercise() {
   const [open, setOpen] = React.useState(false);
 
   const [todo, settodo] = React.useState([]);
@@ -21,7 +21,8 @@ export default function Trainer() {
   const [title, settitle] = React.useState('');
   const [id, setid] = React.useState(0);
   const [type, setType] = React.useState();
-
+  const [Description, setDescription] = React.useState('');
+  const [EffectArea, setEffectArea] = React.useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +34,8 @@ export default function Trainer() {
     setid('');
     settitle('');
     settext('');
+    setEffectArea('');
+    setDescription('');
   };
   const handleAdd = () => {
     if (id) {
@@ -41,27 +44,30 @@ export default function Trainer() {
       console.log('idx==>', index);
       copy[index].title = title;
       copy[index].text = text;
-     
+      copy[index].Description = Description;
+      copy[index].EffectArea = EffectArea;
 
       settodo([...copy]);
       setOpen(false);
     } else {
       setOpen(false);
 
-      settodo([...todo, { id: todo.length + 1, title, text }]);
+      settodo([...todo, { id: todo.length + 1, title, text, Description, EffectArea }]);
       setid(todo.length + 1);
     }
     setid('');
     settitle('');
     settext('');
-  
+    setDescription('');
+    setEffectArea('');
   };
 const onedit=(ele)=>{
   setOpen(true);
   settitle(ele.title);
   settext(ele.text);
   setid(ele.id);
-
+  setDescription(ele.Description);
+  setEffectArea(ele.EffectArea);
   setType('Edit'); 
 }
   const EditId = (id) => {
@@ -75,18 +81,18 @@ const onedit=(ele)=>{
       <div className="d-flex justify-content-end">
         <SearchAppBar/>
         <Button variant="contained" onClick={handleClickOpen}>
-          Add Trainer
+          Excercise
         </Button>{' '}
       </div>{' '}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Trainer&apos; data</DialogTitle>
+        <DialogTitle>Excercise&apos; data</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="title"
             value={title}
-            label="Trainer&apos; Name"
+            label="Excercise&apos; Name"
             type="text"
             fullWidth
             variant="standard"
@@ -99,7 +105,7 @@ const onedit=(ele)=>{
             margin="dense"
             id="data"
             value={text}
-            label="Trainer&apos; Status"
+            label="Excercise&apos; Status"
             type="text"
             fullWidth
             variant="standard"
@@ -108,10 +114,35 @@ const onedit=(ele)=>{
             }}
           />
 
+          <TextField
+            margin="dense"
+            id="data"
+            value={Description}
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+
+          <TextField
+            margin="dense"
+            id="data"
+            value={EffectArea}
+            label="EffectArea"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setEffectArea(e.target.value);
+            }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAdd}>{type === 'Add' ? 'Add Trainer' : 'Update Trainer'}</Button>
+          <Button onClick={handleAdd}>{type === 'Add' ? 'Add Excercise' : 'Update Excercise'}</Button>
         </DialogActions>
       </Dialog>
       {/* <Grid container spacing={{ xs: 2 }}  style={{marginTop:"10px"}}> */}
@@ -166,9 +197,10 @@ const onedit=(ele)=>{
       <table className=" table  table-bordered mt-3 mb-3 text-center pt-5">
         <tr>
           <th className="px-3">ID</th>
-          <th className="px-3">Trainer&apos; name</th>
+          <th className="px-3">Excercise&apos; name</th>
           <th className="px-3"> Status </th>
-
+          <th className="px-3">Description</th>
+          <th className="px-3">EffectArea</th>
           <th className="px-3">Edit</th>
           <th className="px-3">Delete</th>
         </tr>
@@ -178,8 +210,9 @@ const onedit=(ele)=>{
             <th className="px-3 pt-3 pb-3" scope="col"  >
               {ele.title}
             </th>
-
-            <th scope="col">{ele.text}</th>
+            <th className="px-3" scope="col">{ele.text}</th>
+            <th className="px-3" scope="col">{ele.Description}</th>
+            <th scope="col">{ele.EffectArea}</th>
 
             <th className="px-3" scope="col">
               <button
