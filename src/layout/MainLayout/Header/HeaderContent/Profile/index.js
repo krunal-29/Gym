@@ -28,7 +28,8 @@ import SettingTab from './SettingTab';
 // assets
 import avatar1 from 'assets/images/users/avatar-1.png';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-
+import Tooltip from '@mui/material/Tooltip';
+import { useNavigate } from '../../../../../../node_modules/react-router-dom/dist/index';
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -55,9 +56,10 @@ function a11yProps(index) {
 
 const Profile = () => {
   const theme = useTheme();
-
+  let s=useNavigate()
   const handleLogout = async () => {
-    // logout
+    
+    s('/free')
   };
 
   const anchorRef = useRef(null);
@@ -149,9 +151,11 @@ const Profile = () => {
                           </Stack>
                         </Grid>
                         <Grid item>
+                        <Tooltip title="Logout" arrow>
                           <IconButton size="large" color="secondary" onClick={handleLogout}>
                             <LogoutOutlined />
                           </IconButton>
+                          </Tooltip>
                         </Grid>
                       </Grid>
                     </CardContent>

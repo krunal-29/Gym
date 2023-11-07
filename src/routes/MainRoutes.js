@@ -6,6 +6,9 @@ import MainLayout from 'layout/MainLayout';
 import Trainer from"../Trainer"
 import User from 'User';
 import Excercise from 'Excercisemaster';
+import Workout from 'Workout';
+import MoniterUser from 'MoniterUser';
+import FitnessPlan from 'FitnessPlan';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -46,6 +49,15 @@ const MainRoutes = {
         },{
           path: 'Excercisemaster',
           element: <Excercise />
+        },{
+          path: 'Workout',
+          element: <Workout />
+        },{
+          path: 'MoniterUser',
+          element: <MoniterUser />
+        },{
+          path: 'FitnessPlan',
+          element: <FitnessPlan />
         }
       ]
     },

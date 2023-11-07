@@ -36,7 +36,30 @@ const dashboard = {
       url: '/dashboard/Excercisemaster',
       icon: icons.DashboardOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'Workout',
+      title: 'Workout',
+      type: 'item',
+      url: '/dashboard/Workout',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false
+    },{
+      id: 'MoniterUser',
+      title: 'MoniterUser',
+      type: 'item',
+      url: '/dashboard/MoniterUser',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false
+    },{
+      id: 'FitnessPlan',
+      title: 'FitnessPlan',
+      type: 'item',
+      url: '/dashboard/FitnessPlan',
+      icon: icons.DashboardOutlined,
+      breadcrumbs: false
     }
+  
   ]
 };
 

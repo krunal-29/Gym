@@ -8,13 +8,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 //
 import { Container } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
 //
 import SearchAppBar from './Searchbar';
+//
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 
-export default function User() {
+export default function Name() {
   const [open, setOpen] = React.useState(false);
 
   const [todo, settodo] = React.useState([]);
@@ -22,8 +27,17 @@ export default function User() {
   const [title, settitle] = React.useState('');
   const [id, setid] = React.useState(0);
   const [type, setType] = React.useState();
-  const [height, setHeight] = React.useState('');
-  const [weight, setWeight] = React.useState('');
+
+
+  const [exercise, setExercise] = React.useState('');
+  
+  const [arr, setArr]= React.useState([])
+  
+
+    const handleChange = (event) => {
+      setExercise(event.target.value);
+      
+    };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -35,8 +49,6 @@ export default function User() {
     setid('');
     settitle('');
     settext('');
-    setWeight('');
-    setHeight('');
   };
   const handleAdd = () => {
     if (id) {
@@ -45,30 +57,29 @@ export default function User() {
       console.log('idx==>', index);
       copy[index].title = title;
       copy[index].text = text;
-      copy[index].height = height;
-      copy[index].weight = weight;
+      
+     
 
       settodo([...copy]);
       setOpen(false);
     } else {
       setOpen(false);
 
-      settodo([...todo, { id: todo.length + 1, title, text, height, weight }]);
+      settodo([...todo, { id: todo.length + 1, title, text ,Execrise:arr}]);
+      setArr([])
       setid(todo.length + 1);
     }
     setid('');
     settitle('');
     settext('');
-    setHeight('');
-    setWeight('');
+  
   };
 const onedit=(ele)=>{
   setOpen(true);
   settitle(ele.title);
   settext(ele.text);
   setid(ele.id);
-  setHeight(ele.height);
-  setWeight(ele.weight);
+
   setType('Edit'); 
 }
   const EditId = (id) => {
@@ -77,23 +88,32 @@ const onedit=(ele)=>{
     }
   };
 
+const handleAddExercise=()=>{
+
+   let cop= [...arr]
+   cop.push(exercise)
+   setArr(cop)
+console.log(exercise,arr)
+   
+}
+
   return (
     <Container style={{ marginTop: '10px' }}>
       <div className="d-flex justify-content-end">
         <SearchAppBar/>
         <Button variant="contained" onClick={handleClickOpen}>
-        <AddIcon /> User  
+        <AddIcon  />  Name
         </Button>{' '}
       </div>{' '}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>User&apos; data</DialogTitle>
+        <DialogTitle>Name&apos; data</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="title"
             value={title}
-            label="User&apos; Name"
+            label="Name"
             type="text"
             fullWidth
             variant="standard"
@@ -106,7 +126,7 @@ const onedit=(ele)=>{
             margin="dense"
             id="data"
             value={text}
-            label="User&apos; Status"
+            label="Description"
             type="text"
             fullWidth
             variant="standard"
@@ -115,35 +135,42 @@ const onedit=(ele)=>{
             }}
           />
 
-          <TextField
-            margin="dense"
-            id="data"
-            value={height}
-            label="Height"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => {
-              setHeight(e.target.value);
-            }}
-          />
+<Box sx={{ minWidth: 120, minHeight:50 }}>
+      <FormControl style={{width:'60%' ,margin:"5px 5px 0px 0px"}}>
+        <InputLabel id="demo-simple-select-label">Exercise</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={exercise}
+          label="Exercise"
+          onChange={handleChange}
+        >
+          <MenuItem value="pushup">pushup</MenuItem>
+          <MenuItem value="Upperbody">Upperbody</MenuItem>
+          <MenuItem value="lowerbody">lowerbody</MenuItem>
+        </Select>
+      </FormControl>
+      <Button variant="contained" style={{margin:"5px 5px 0px 5px"}} onClick={()=>{handleAddExercise()}}>
+      <AddIcon  />Exercise
+      </Button>
+      <table className=" table  table-bordered mt-3 mb-3 text-center pt-5">
 
-          <TextField
-            margin="dense"
-            id="data"
-            value={weight}
-            label="Weight"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => {
-              setWeight(e.target.value);
-            }}
-          />
+      {arr.map((ex)=>(
+
+        <tr key={ex.length+1}>
+            <td className="px-3">
+        {ex}
+            </td>
+        </tr> 
+       
+      ))}
+      </table>
+    </Box>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAdd}>{type === 'Add' ? 'Add User' : 'Update User'}</Button>
+          <Button onClick={handleAdd}>{type === 'Add' ? 'Add Name' : 'Update Name'}</Button>
         </DialogActions>
       </Dialog>
       {/* <Grid container spacing={{ xs: 2 }}  style={{marginTop:"10px"}}> */}
@@ -198,11 +225,11 @@ const onedit=(ele)=>{
       <table className=" table  table-bordered mt-3 mb-3 text-center pt-5">
         <tr>
           {/* <th className="px-3">ID</th> */}
-          <th className="px-3">User&apos;s name</th>
-          <th className="px-3"> Status </th>
-          <th className="px-3">Height</th>
-          <th className="px-3">Weight</th>
+          <th className="px-3">Name</th>
+          <th className="px-3"> Description </th>
+
           <th className="px-3">Actions</th>
+
         </tr>
         {todo.map((ele) => (
           <tr className="table-primary" key={ele.id}>
@@ -210,9 +237,8 @@ const onedit=(ele)=>{
             <th className="px-3 pt-3 pb-3" scope="col"  >
               {ele.title}
             </th>
-            <th className="px-3" scope="col">{ele.text}</th>
-            <th className="px-3" scope="col">{ele.height}</th>
-            <th scope="col">{ele.weight}</th>
+
+            <th scope="col">{ele.text}</th>
 
             <th className="px-3" scope="col">
               <button
@@ -225,8 +251,7 @@ const onedit=(ele)=>{
              
                 <i className="fas fa-edit">&nbsp;</i>
               </button>
-            
-        &nbsp; 
+            &nbsp;
               <button
                 className="btn  btn-light bg-light "
                 onClick={() => {

@@ -7,6 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 //
 import { Container } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+
 
 //
 import SearchAppBar from './Searchbar';
@@ -75,7 +77,7 @@ const onedit=(ele)=>{
       <div className="d-flex justify-content-end">
         <SearchAppBar/>
         <Button variant="contained" onClick={handleClickOpen}>
-          Add Trainer
+        <AddIcon  />  Trainer
         </Button>{' '}
       </div>{' '}
       <Dialog open={open} onClose={handleClose}>
@@ -165,16 +167,16 @@ const onedit=(ele)=>{
       <div className="table-responsive">
       <table className=" table  table-bordered mt-3 mb-3 text-center pt-5">
         <tr>
-          <th className="px-3">ID</th>
-          <th className="px-3">Trainer&apos; name</th>
+          {/* <th className="px-3">ID</th> */}
+          <th className="px-3">Trainer&apos;s name</th>
           <th className="px-3"> Status </th>
 
-          <th className="px-3">Edit</th>
-          <th className="px-3">Delete</th>
+          <th className="px-3">Actions</th>
+
         </tr>
         {todo.map((ele) => (
           <tr className="table-primary" key={ele.id}>
-            <th className="px-3" scope="col">{ele.id}</th>
+            {/* <th className="px-3" scope="col">{ele.id}</th> */}
             <th className="px-3 pt-3 pb-3" scope="col"  >
               {ele.title}
             </th>
@@ -192,8 +194,7 @@ const onedit=(ele)=>{
              
                 <i className="fas fa-edit">&nbsp;</i>
               </button>
-            </th>
-            <th className="px-3" scope="col">
+            &nbsp;
               <button
                 className="btn  btn-light bg-light "
                 onClick={() => {

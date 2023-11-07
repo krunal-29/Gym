@@ -15,7 +15,15 @@ const HeaderContent = () => {
 
   return (
     <>
-     <Box sx={{ width: '100%', ml: 1 }} />
+     
+      <Box sx={{ width: '100%', ml: 1 }} style={{textAlign:"center"}}>
+      <h5>
+
+      FITNESS APP
+      </h5>
+      </Box>
+      
+     <Box sx={{  ml: 1 }} />
 {/* 
       <IconButton
        
