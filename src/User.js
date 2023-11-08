@@ -8,14 +8,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 //
 import { Container } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
+import FilterListIcon from '@mui/icons-material/FilterList';
 //
 import SearchAppBar from './Searchbar';
+//
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+
 
 
 
 export default function User() {
-  const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
 
   const [todo, settodo] = React.useState([]);
   const [text, settext] = React.useState('');
@@ -24,14 +31,37 @@ export default function User() {
   const [type, setType] = React.useState();
   const [height, setHeight] = React.useState('');
   const [weight, setWeight] = React.useState('');
+  const [trainer, setTrainer] = React.useState('');
+  const [severity, setSeverity] = React.useState('');
+
+
+  const [open, setOpen] = React.useState(false);
+
+
+  const handleChange = (event) => {
+    setTrainer(event.target.value);
+  };
+
+  const handleChange2 = (event) => {
+    setSeverity(event.target.value);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
-    setType('Add');
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+    setType('Add');
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
     setid('');
     settitle('');
     settext('');
@@ -49,9 +79,9 @@ export default function User() {
       copy[index].weight = weight;
 
       settodo([...copy]);
-      setOpen(false);
+      setOpen1(false);
     } else {
-      setOpen(false);
+      setOpen1(false);
 
       settodo([...todo, { id: todo.length + 1, title, text, height, weight }]);
       setid(todo.length + 1);
@@ -63,7 +93,7 @@ export default function User() {
     setWeight('');
   };
 const onedit=(ele)=>{
-  setOpen(true);
+  setOpen1(true);
   settitle(ele.title);
   settext(ele.text);
   setid(ele.id);
@@ -80,12 +110,66 @@ const onedit=(ele)=>{
   return (
     <Container style={{ marginTop: '10px' }}>
       <div className="d-flex justify-content-end">
+
+      <Button variant="outlined" onClick={handleClickOpen} style={{height:'5.5vh' ,marginTop:'14px'}}>
+        <FilterListIcon/>
+      </Button>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Filter"}</DialogTitle>
+        <DialogContent>
+        <Box sx={{ minWidth: 120 }} > 
+        <FormControl  sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-filled-label">Trainer</InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-filled"
+          value={trainer}
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      {/* 2 */}
+      <FormControl  sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-label">Severity</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select-filled"
+          value={severity}
+          onChange={handleChange2}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>close</Button>
+          <Button onClick={handleClose}>Filter</Button>
+        </DialogActions>
+      </Dialog>
+
         <SearchAppBar/>
-        <Button variant="contained" onClick={handleClickOpen}>
+        <Button variant="contained" onClick={handleClickOpen1}>
         <AddIcon /> User  
         </Button>{' '}
       </div>{' '}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open1} onClose={handleClose1}>
         <DialogTitle>User&apos; data</DialogTitle>
         <DialogContent>
           <TextField
@@ -142,7 +226,7 @@ const onedit=(ele)=>{
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose1}>Cancel</Button>
           <Button onClick={handleAdd}>{type === 'Add' ? 'Add User' : 'Update User'}</Button>
         </DialogActions>
       </Dialog>

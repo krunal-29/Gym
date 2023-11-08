@@ -49,6 +49,7 @@ export default function Name() {
     setid('');
     settitle('');
     settext('');
+    setArr([])
   };
   const handleAdd = () => {
     if (id) {
@@ -57,6 +58,7 @@ export default function Name() {
       console.log('idx==>', index);
       copy[index].title = title;
       copy[index].text = text;
+      copy[index].Execrise=arr
       
      
 
@@ -79,6 +81,7 @@ const onedit=(ele)=>{
   settitle(ele.title);
   settext(ele.text);
   setid(ele.id);
+  setArr(ele.Execrise)
 
   setType('Edit'); 
 }
@@ -91,10 +94,15 @@ const onedit=(ele)=>{
 const handleAddExercise=()=>{
 
    let cop= [...arr]
-   cop.push(exercise)
-   setArr(cop)
-console.log(exercise,arr)
-   
+   if(!arr.includes(exercise)){
+
+     cop.push(exercise)
+     setArr(cop)
+  console.log(exercise,arr)
+   }
+   else{
+    alert("Already incldes")
+   }
 }
 
   return (
@@ -154,12 +162,30 @@ console.log(exercise,arr)
       <AddIcon  />Exercise
       </Button>
       <table className=" table  table-bordered mt-3 mb-3 text-center pt-5">
+        <tr>
+          <th>Exercise</th>
+          <th>Delete</th>
+        </tr>
 
       {arr.map((ex)=>(
 
         <tr key={ex.length+1}>
             <td className="px-3">
         {ex}
+            </td>
+            <td>
+            <button
+                className="btn  btn-light bg-light "
+                onClick={() => {
+                  let copy=[...arr]
+                  let index=copy.findIndex((ele)=>ele==ex)
+                  copy.splice(index,1)
+                  setArr(copy)                 
+                }}
+              >
+                {' '}
+                <i className="fas fa-trash">&nbsp;</i>{' '}
+              </button>
             </td>
         </tr> 
        
